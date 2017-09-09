@@ -50,31 +50,33 @@ class MLBExtractor():
 
         df_batter = pd.DataFrame(batters)
 
-        df_batter.columns = ['bats', 'current_position', 'dob', 'first_name', 'height', 'id',
-        'jersey_number', 'last_name', 'pos', 'team', 'throws', 'type', 'weight', 'Empty',
-        'Empty_ab', 'Empty_avg', 'Empty_bb', 'Empty_cs', 'Empty_h', 'Empty_hr', 'Empty_ops',
-        'Empty_r', 'Empty_rbi', 'Empty_sb', 'Empty_so', 'Loaded', 'Loaded_ab', 'Loaded_avg',
-        'Loaded_bb', 'Loaded_cs', 'Loaded_h', 'Loaded_hr', 'Loaded_ops', 'Loaded_r',
-        'Loaded_rbi', 'Loaded_sb', 'Loaded_so', 'Men_On', 'Men_On_ab', 'Men_On_avg', 
-        'Men_On_bb', 'Men_On_cs', 'Men_On_h', 'Men_On_hr', 'Men_On_ops', 'Men_On_r', 
-        'Men_On_rbi', 'Men_On_sb', 'Men_On_so', 'Pitch', 'Pitch_hates', 'Pitch_loves', 
-        'RISP', 'RISP_ab', 'RISP_avg', 'RISP_bb', 'RISP_cs', 'RISP_h', 'RISP_hr', 'RISP_ops', 
-        'RISP_r', 'RISP_rbi', 'RISP_sb', 'RISP_so', 'Team', 'Team_ab', 'Team_avg', 'Team_bb', 
-        'Team_cs', 'Team_des', 'Team_h', 'Team_hr', 'Team_ops', 'Team_r', 'Team_rbi', 
-        'Team_sb', 'Team_so', 'atbats', 'atbats_ab', 'career', 'career_ab', 'career_avg', 
-        'career_bb', 'career_cs', 'career_h', 'career_hr', 'career_ops', 'career_r', 
-        'career_rbi', 'career_sb', 'career_so', 'faced', 'faced_pitch', 'month', 'month_ab', 
-        'month_avg', 'month_bb', 'month_cs', 'month_des', 'month_h', 'month_hr', 'month_ops', 
-        'month_r', 'month_rbi', 'month_sb', 'month_so', 'season', 'season_ab', 'season_avg', 
-        'season_bb', 'season_cs', 'season_h', 'season_hr', 'season_ops', 'season_r', 
-        'season_rbi', 'season_sb', 'season_so', 'vs_LHP', 'vs_LHP_ab', 'vs_LHP_avg', 
-        'vs_LHP_bb', 'vs_LHP_cs', 'vs_LHP_h', 'vs_LHP_hr', 'vs_LHP_ops', 'vs_LHP_r', 
-        'vs_LHP_rbi', 'vs_LHP_sb', 'vs_LHP_so', 'vs_P', 'vs_P5', 'vs_P5_ab', 'vs_P5_avg', 
-        'vs_P5_bb', 'vs_P5_cs', 'vs_P5_des', 'vs_P5_h', 'vs_P5_hr', 'vs_P5_ops', 'vs_P5_r', 
-        'vs_P5_rbi', 'vs_P5_sb', 'vs_P5_so', 'vs_P_ab', 'vs_P_avg', 'vs_P_bb', 'vs_P_cs', 
-        'vs_P_des', 'vs_P_h', 'vs_P_hr', 'vs_P_ops', 'vs_P_r', 'vs_P_rbi', 'vs_P_sb', 
-        'vs_P_so', 'vs_RHP', 'vs_RHP_ab', 'vs_RHP_avg', 'vs_RHP_bb', 'vs_RHP_cs', 'vs_RHP_h',
-        'vs_RHP_hr', 'vs_RHP_ops', 'vs_RHP_r', 'vs_RHP_rbi', 'vs_RHP_sb', 'vs_RHP_so']
+        df_batter = self.format_columns(df_batter)
+
+        # df_batter.columns = ['bats', 'current_position', 'dob', 'first_name', 'height', 'id',
+        # 'jersey_number', 'last_name', 'pos', 'team', 'throws', 'type', 'weight', 'Empty',
+        # 'Empty_ab', 'Empty_avg', 'Empty_bb', 'Empty_cs', 'Empty_h', 'Empty_hr', 'Empty_ops',
+        # 'Empty_r', 'Empty_rbi', 'Empty_sb', 'Empty_so', 'Loaded', 'Loaded_ab', 'Loaded_avg',
+        # 'Loaded_bb', 'Loaded_cs', 'Loaded_h', 'Loaded_hr', 'Loaded_ops', 'Loaded_r',
+        # 'Loaded_rbi', 'Loaded_sb', 'Loaded_so', 'Men_On', 'Men_On_ab', 'Men_On_avg', 
+        # 'Men_On_bb', 'Men_On_cs', 'Men_On_h', 'Men_On_hr', 'Men_On_ops', 'Men_On_r', 
+        # 'Men_On_rbi', 'Men_On_sb', 'Men_On_so', 'Pitch', 'Pitch_hates', 'Pitch_loves', 
+        # 'RISP', 'RISP_ab', 'RISP_avg', 'RISP_bb', 'RISP_cs', 'RISP_h', 'RISP_hr', 'RISP_ops', 
+        # 'RISP_r', 'RISP_rbi', 'RISP_sb', 'RISP_so', 'Team', 'Team_ab', 'Team_avg', 'Team_bb', 
+        # 'Team_cs', 'Team_des', 'Team_h', 'Team_hr', 'Team_ops', 'Team_r', 'Team_rbi', 
+        # 'Team_sb', 'Team_so', 'atbats', 'atbats_ab', 'career', 'career_ab', 'career_avg', 
+        # 'career_bb', 'career_cs', 'career_h', 'career_hr', 'career_ops', 'career_r', 
+        # 'career_rbi', 'career_sb', 'career_so', 'faced', 'faced_pitch', 'month', 'month_ab', 
+        # 'month_avg', 'month_bb', 'month_cs', 'month_des', 'month_h', 'month_hr', 'month_ops', 
+        # 'month_r', 'month_rbi', 'month_sb', 'month_so', 'season', 'season_ab', 'season_avg', 
+        # 'season_bb', 'season_cs', 'season_h', 'season_hr', 'season_ops', 'season_r', 
+        # 'season_rbi', 'season_sb', 'season_so', 'vs_LHP', 'vs_LHP_ab', 'vs_LHP_avg', 
+        # 'vs_LHP_bb', 'vs_LHP_cs', 'vs_LHP_h', 'vs_LHP_hr', 'vs_LHP_ops', 'vs_LHP_r', 
+        # 'vs_LHP_rbi', 'vs_LHP_sb', 'vs_LHP_so', 'vs_P', 'vs_P5', 'vs_P5_ab', 'vs_P5_avg', 
+        # 'vs_P5_bb', 'vs_P5_cs', 'vs_P5_des', 'vs_P5_h', 'vs_P5_hr', 'vs_P5_ops', 'vs_P5_r', 
+        # 'vs_P5_rbi', 'vs_P5_sb', 'vs_P5_so', 'vs_P_ab', 'vs_P_avg', 'vs_P_bb', 'vs_P_cs', 
+        # 'vs_P_des', 'vs_P_h', 'vs_P_hr', 'vs_P_ops', 'vs_P_r', 'vs_P_rbi', 'vs_P_sb', 
+        # 'vs_P_so', 'vs_RHP', 'vs_RHP_ab', 'vs_RHP_avg', 'vs_RHP_bb', 'vs_RHP_cs', 'vs_RHP_h',
+        # 'vs_RHP_hr', 'vs_RHP_ops', 'vs_RHP_r', 'vs_RHP_rbi', 'vs_RHP_sb', 'vs_RHP_so']
 
         df_batter = df_batter.drop(['Empty','Loaded','Men_On','Pitch','RISP','Team','career',
             'atbats','atbats_ab','faced','faced_pitch','month','season',
@@ -108,28 +110,30 @@ class MLBExtractor():
 
         df_pitcher = pd.DataFrame(pitchers)
         
-        df_pitcher.columns = ['bats', 'dob', 'first_name', 'height', 'id', 'jersey_number',
-        'last_name', 'pos', 'team', 'throws', 'type', 'weight', 'Empty', 'Empty_ab', 'Empty_avg',
-        'Empty_bb', 'Empty_era', 'Empty_h', 'Empty_hr', 'Empty_ip', 'Empty_rbi', 'Empty_so',
-        'Empty_whip', 'Loaded', 'Loaded_ab', 'Loaded_avg', 'Loaded_bb', 'Loaded_era','Loaded_h',
-        'Loaded_hr', 'Loaded_ip', 'Loaded_rbi', 'Loaded_so', 'Loaded_whip', 'Men_On', 'Men_On_ab',
-        'Men_On_avg', 'Men_On_bb', 'Men_On_era', 'Men_On_h', 'Men_On_hr', 'Men_On_ip',
-        'Men_On_rbi', 'Men_On_so', 'Men_On_whip', 'Month', 'Month_ab', 'Month_avg', 'Month_bb',
-        'Month_des', 'Month_era', 'Month_h', 'Month_hr', 'Month_ip', 'Month_rbi', 'Month_so',
-        'Month_whip', 'Pitch', 'Pitch_out', 'RISP', 'RISP_ab', 'RISP_avg', 'RISP_bb', 'RISP_era',
-        'RISP_h', 'RISP_hr', 'RISP_ip', 'RISP_rbi', 'RISP_so', 'RISP_whip', 'Team', 'Team_ab',
-        'Team_avg', 'Team_bb', 'Team_des', 'Team_era', 'Team_h', 'Team_hr', 'Team_ip', 'Team_rbi',
-        'Team_so', 'Team_whip', 'career', 'career_ab', 'career_avg', 'career_bb', 'career_era',
-        'career_h', 'career_hr', 'career_ip', 'career_l', 'career_rbi', 'career_so', 'career_sv',
-        'career_w', 'career_whip', 'season', 'season_ab', 'season_avg', 'season_bb', 'season_era',
-        'season_h', 'season_hr', 'season_ip', 'season_l', 'season_rbi', 'season_so', 'season_sv', 
-        'season_w', 'season_whip', 'vs_B', 'vs_B5', 'vs_B5_ab', 'vs_B5_avg', 'vs_B5_bb', 'vs_B5_des', 
-        'vs_B5_era', 'vs_B5_h', 'vs_B5_hr', 'vs_B5_ip', 'vs_B5_rbi', 'vs_B5_so', 'vs_B5_whip', 
-        'vs_B_ab', 'vs_B_avg', 'vs_B_bb', 'vs_B_des', 'vs_B_era', 'vs_B_h', 'vs_B_hr', 'vs_B_ip',
-        'vs_B_rbi', 'vs_B_so', 'vs_B_whip', 'vs_LHB', 'vs_LHB_ab', 'vs_LHB_avg', 'vs_LHB_bb', 
-        'vs_LHB_era', 'vs_LHB_h', 'vs_LHB_hr', 'vs_LHB_ip', 'vs_LHB_rbi', 'vs_LHB_so', 'vs_LHB_whip', 
-        'vs_RHB', 'vs_RHB_ab', 'vs_RHB_avg', 'vs_RHB_bb', 'vs_RHB_era', 'vs_RHB_h', 'vs_RHB_hr', 
-        'vs_RHB_ip', 'vs_RHB_rbi', 'vs_RHB_so', 'vs_RHB_whip']
+        df_pitcher = self.format_columns(df_pitcher)
+
+        # df_pitcher.columns = ['bats', 'dob', 'first_name', 'height', 'id', 'jersey_number',
+        # 'last_name', 'pos', 'team', 'throws', 'type', 'weight', 'Empty', 'Empty_ab', 'Empty_avg',
+        # 'Empty_bb', 'Empty_era', 'Empty_h', 'Empty_hr', 'Empty_ip', 'Empty_rbi', 'Empty_so',
+        # 'Empty_whip', 'Loaded', 'Loaded_ab', 'Loaded_avg', 'Loaded_bb', 'Loaded_era','Loaded_h',
+        # 'Loaded_hr', 'Loaded_ip', 'Loaded_rbi', 'Loaded_so', 'Loaded_whip', 'Men_On', 'Men_On_ab',
+        # 'Men_On_avg', 'Men_On_bb', 'Men_On_era', 'Men_On_h', 'Men_On_hr', 'Men_On_ip',
+        # 'Men_On_rbi', 'Men_On_so', 'Men_On_whip', 'Month', 'Month_ab', 'Month_avg', 'Month_bb',
+        # 'Month_des', 'Month_era', 'Month_h', 'Month_hr', 'Month_ip', 'Month_rbi', 'Month_so',
+        # 'Month_whip', 'Pitch', 'Pitch_out', 'RISP', 'RISP_ab', 'RISP_avg', 'RISP_bb', 'RISP_era',
+        # 'RISP_h', 'RISP_hr', 'RISP_ip', 'RISP_rbi', 'RISP_so', 'RISP_whip', 'Team', 'Team_ab',
+        # 'Team_avg', 'Team_bb', 'Team_des', 'Team_era', 'Team_h', 'Team_hr', 'Team_ip', 'Team_rbi',
+        # 'Team_so', 'Team_whip', 'career', 'career_ab', 'career_avg', 'career_bb', 'career_era',
+        # 'career_h', 'career_hr', 'career_ip', 'career_l', 'career_rbi', 'career_so', 'career_sv',
+        # 'career_w', 'career_whip', 'season', 'season_ab', 'season_avg', 'season_bb', 'season_era',
+        # 'season_h', 'season_hr', 'season_ip', 'season_l', 'season_rbi', 'season_so', 'season_sv', 
+        # 'season_w', 'season_whip', 'vs_B', 'vs_B5', 'vs_B5_ab', 'vs_B5_avg', 'vs_B5_bb', 'vs_B5_des', 
+        # 'vs_B5_era', 'vs_B5_h', 'vs_B5_hr', 'vs_B5_ip', 'vs_B5_rbi', 'vs_B5_so', 'vs_B5_whip', 
+        # 'vs_B_ab', 'vs_B_avg', 'vs_B_bb', 'vs_B_des', 'vs_B_era', 'vs_B_h', 'vs_B_hr', 'vs_B_ip',
+        # 'vs_B_rbi', 'vs_B_so', 'vs_B_whip', 'vs_LHB', 'vs_LHB_ab', 'vs_LHB_avg', 'vs_LHB_bb', 
+        # 'vs_LHB_era', 'vs_LHB_h', 'vs_LHB_hr', 'vs_LHB_ip', 'vs_LHB_rbi', 'vs_LHB_so', 'vs_LHB_whip', 
+        # 'vs_RHB', 'vs_RHB_ab', 'vs_RHB_avg', 'vs_RHB_bb', 'vs_RHB_era', 'vs_RHB_h', 'vs_RHB_hr', 
+        # 'vs_RHB_ip', 'vs_RHB_rbi', 'vs_RHB_so', 'vs_RHB_whip']
         
         df_pitcher = df_pitcher.drop(['Empty','Loaded','Men_On','Month','Pitch','Pitch_out','RISP',
         'Team','career','season','vs_B','vs_B5','vs_LHB','vs_RHB',], axis = 1)
@@ -237,20 +241,25 @@ class MLBExtractor():
         df_runner['game_id'] = game_id
         df_bat['game_id'] = game_id    
 
-        df_pitch.columns = ['ax','ay','az','b_height','bat_id','bat_num','batter','break_angle',
-        'break_length','break_y','cc','des','des_es','end_speed','event_num','id','mt',
-        'nasty','on_1b','on_2b','on_3b','p_throws','pfx_x','pfx_z','pitch_type',
-        'pitcher','play_guid','px','pz','spin_dir','spin_rate','start_speed','sv_id',
-        'sz_bot','sz_top','tfs','tfs_zulu','type','type_confidence','vx0','vy0','vz0',
-        'x','x0','y','y0','z0','zone','away_team_runs','home_team_runs', 'game_id'] 
-        df_action.columns = ['away_team_runs','b','des','des_es','event','event_es','event_num',
-        'home_team_runs','o','pitch','play_guid','player','s','score','tfs','tfs_zulu','game_id']
-        df_runner.columns = ['earned','end','event','event_num','id','rbi','score','start',
-        'game_id']
-        df_bat.columns = ['index', 'away_team_runs', 'b', 'b_height', 'batter', 'des', 'des_es',
-        'event', 'event_es', 'event_num', 'home_team_runs', 'num', 'o', 'p_throws', 'pitcher',
-        'play_guid', 's', 'score', 'stand', 'start_tfs', 'start_tfs_zulu', 'pitch', 'po',
-        'runner','game_id']
+        df_pitch = self.format_columns(df_pitch)
+        df_action = self.format_columns(df_action)
+        df_runner = self.format_columns(df_runner)
+        df_bat = self.format_columns(df_bat)
+
+        # df_pitch.columns = ['ax','ay','az','b_height','bat_id','bat_num','batter','break_angle',
+        # 'break_length','break_y','cc','des','des_es','end_speed','event_num','id','mt',
+        # 'nasty','on_1b','on_2b','on_3b','p_throws','pfx_x','pfx_z','pitch_type',
+        # 'pitcher','play_guid','px','pz','spin_dir','spin_rate','start_speed','sv_id',
+        # 'sz_bot','sz_top','tfs','tfs_zulu','type','type_confidence','vx0','vy0','vz0',
+        # 'x','x0','y','y0','z0','zone','away_team_runs','home_team_runs', 'game_id'] 
+        # df_action.columns = ['away_team_runs','b','des','des_es','event','event_es','event_num',
+        # 'home_team_runs','o','pitch','play_guid','player','s','score','tfs','tfs_zulu','game_id']
+        # df_runner.columns = ['earned','end','event','event_num','id','rbi','score','start',
+        # 'game_id']
+        # df_bat.columns = ['index', 'away_team_runs', 'b', 'b_height', 'batter', 'des', 'des_es',
+        # 'event', 'event_es', 'event_num', 'home_team_runs', 'num', 'o', 'p_throws', 'pitcher',
+        # 'play_guid', 's', 'score', 'stand', 'start_tfs', 'start_tfs_zulu', 'pitch', 'po',
+        # 'runner','game_id']
 
         return df_pitch, df_action, df_runner
 
@@ -317,15 +326,19 @@ class MLBExtractor():
         coach_df = pd.DataFrame(coach_list)
 
 
-        player_df.columns = ['avg', 'bat_order', 'bats', 'boxname', 'current_position',
-        'era', 'first', 'game_position', 'hr', 'id', 'last', 'losses', 'num',
-        'parent_team_abbrev', 'parent_team_id', 'position', 'rbi', 'rl', 'status',
-        'team_abbrev', 'team_id', 'wins', 'game_date', 'game_id', 'game_venue',
-        'team_id', 'team_name', 'travel_type']
-        coach_df.columns = ['first','id','last','num','position','game_date','game_id',
-        'game_venue','team_id','team_name','travel_type']
-        umpire_df.columns = ['first','id','last','name','position','game_id','game_date',
-        'game_venue']
+        player_df = self.format_columns(player_df)
+        coach_df = self.format_columns(coach_df)
+        umpire_df = self.format_columns(umpire_df)
+
+        # player_df.columns = ['avg', 'bat_order', 'bats', 'boxname', 'current_position',
+        # 'era', 'first', 'game_position', 'hr', 'id', 'last', 'losses', 'num',
+        # 'parent_team_abbrev', 'parent_team_id', 'position', 'rbi', 'rl', 'status',
+        # 'team_abbrev', 'team_id', 'wins', 'game_date', 'game_id', 'game_venue',
+        # 'team_id', 'team_name', 'travel_type']
+        # coach_df.columns = ['first','id','last','num','position','game_date','game_id',
+        # 'game_venue','team_id','team_name','travel_type']
+        # umpire_df.columns = ['first','id','last','name','position','game_id','game_date',
+        # 'game_venue']
 
 
         return player_df, coach_df, umpire_df
@@ -343,6 +356,16 @@ class MLBExtractor():
 
         return df_pitch
         #return df_batter, df_pitcher, df_pitch, df_pitch, df_action, df_runner, df_bat, player_df, coach_df, umpire_df
+
+    def format_columns(self, df):
+        new_names = []
+        for name in df.columns:
+            new_names.append(name.replace('@',''))
+        df.columns = new_names
+        
+        df = df[sorted(new_names)]
+        
+        return df
 
 
 
